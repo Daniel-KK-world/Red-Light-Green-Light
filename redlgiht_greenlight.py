@@ -5,7 +5,7 @@ import random
 # --- Constants ---
 WIDTH, HEIGHT = 800, 600
 PLAYER_SIZE = 50  
-PLAYER_SPEED = 0.8
+PLAYER_SPEED = 0.7
 AI_SPEED = 0.8
 GOAL_LINE = 10
 NUM_AI = 8
@@ -78,7 +78,7 @@ def draw_light(state):
     
     # Draw doll
     if doll_img:
-        screen.blit(doll_img, (WIDTH//2 - 60, 10))
+        screen.blit(doll_img, (120, 20))
     
     # Traffic light with text
     color = (0, 255, 0) if state == "green" else (255, 0, 0)
