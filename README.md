@@ -1,5 +1,9 @@
 # Red Light Green Light Game
 
+
+<img width="1179" height="683" alt="image" src="https://github.com/user-attachments/assets/b8bb04ce-1b7d-4035-887c-1db6c7f3f7b3" />
+
+
 This project is a simple implementation of the "Red Light, Green Light" game inspired by the popular series "Squid Game". The game is built using Pygame and allows players to participate in a fun and interactive experience.
 
 ## Table of Contents
