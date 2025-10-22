@@ -1,0 +1,200 @@
+[
+    {
+        "label": "pygame",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pygame",
+        "description": "pygame",
+        "detail": "pygame",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "Player",
+        "kind": 6,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "class Player:\n    def __init__(self, x, y, image, is_human=False):\n        self.rect = pygame.Rect(x, y, PLAYER_SIZE, PLAYER_SIZE)\n        self.image = image\n        self.is_human = is_human\n        self.alive = True\n        self.won = False\n        self.speed = PLAYER_SPEED if is_human else AI_SPEED\n    def move(self, dx, dy):\n        if not self.alive or self.won:",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "load_image",
+        "kind": 2,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "def load_image(filename, size=None):\n    try:\n        img = pygame.image.load(filename).convert_alpha()\n        if size:\n            img = pygame.transform.scale(img, size)\n        return img\n    except:\n        print(f\"[!] Failed to load: {filename}\")\n        return None\n# Load images",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "create_road_bg",
+        "kind": 2,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "def create_road_bg():\n    bg = pygame.Surface((WIDTH, HEIGHT))\n    bg.fill((30, 30, 30))  # Dark gray background\n    # Draw road markings (full width)\n    pygame.draw.rect(bg, (50, 50, 50), (0, HEIGHT//3, WIDTH, HEIGHT//3))\n    for y in range(0, HEIGHT, 40):\n        pygame.draw.rect(bg, (200, 200, 0), (WIDTH//2 - 5, y, 10, 20))\n    return bg\nroad_bg = create_road_bg()\n# --- Player Class ---",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "draw_light",
+        "kind": 2,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "def draw_light(state):\n    screen.blit(road_bg, (0, 0))\n    # Draw doll\n    if doll_img:\n        screen.blit(doll_img, (120, 20))\n    # Traffic light with text\n    color = (0, 255, 0) if state == \"green\" else (255, 0, 0)\n    text_color = (200, 255, 200) if state == \"green\" else (255, 200, 200)\n    status_text = \"GO!\" if state == \"green\" else \"STOP!\"\n    pygame.draw.circle(screen, color, (50, 40), 20)",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "reset",
+        "kind": 2,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "def reset():\n    players = []\n    start_y = HEIGHT - 100  # Same baseline for all\n    # Human player (center)\n    players.append(Player(WIDTH//2 - PLAYER_SIZE//2, start_y, player_img, True))\n    # AI players - evenly spaced across full width\n    spacing = WIDTH // (NUM_AI + 1)\n    for i in range(NUM_AI):\n        x = spacing * (i + 1) - PLAYER_SIZE//2\n        # Ensure cars stay within bounds",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "main",
+        "kind": 2,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "def main():\n    players, game_state, timer, light_duration, lost, won = reset()\n    while True:\n        draw_light(game_state)\n        for event in pygame.event.get():\n            if event.type == pygame.QUIT:\n                pygame.quit()\n                sys.exit()\n            if (lost or won) and event.type == pygame.KEYDOWN and event.key == pygame.K_r:\n                players, game_state, timer, light_duration, lost, won = reset()",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "PLAYER_SIZE",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "PLAYER_SIZE = 50  \nPLAYER_SPEED = 0.7\nAI_SPEED = 0.8\nGOAL_LINE = 10\nNUM_AI = 8\n# --- Initialize Pygame ---\npygame.init()\nscreen = pygame.display.set_mode((WIDTH, HEIGHT))\npygame.display.set_caption(\"Red Light Green Light - Road Edition\")\nclock = pygame.time.Clock()",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "PLAYER_SPEED",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "PLAYER_SPEED = 0.7\nAI_SPEED = 0.8\nGOAL_LINE = 10\nNUM_AI = 8\n# --- Initialize Pygame ---\npygame.init()\nscreen = pygame.display.set_mode((WIDTH, HEIGHT))\npygame.display.set_caption(\"Red Light Green Light - Road Edition\")\nclock = pygame.time.Clock()\nfont = pygame.font.SysFont(None, 48)",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "AI_SPEED",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "AI_SPEED = 0.8\nGOAL_LINE = 10\nNUM_AI = 8\n# --- Initialize Pygame ---\npygame.init()\nscreen = pygame.display.set_mode((WIDTH, HEIGHT))\npygame.display.set_caption(\"Red Light Green Light - Road Edition\")\nclock = pygame.time.Clock()\nfont = pygame.font.SysFont(None, 48)\nsmall_font = pygame.font.SysFont(None, 36)",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "GOAL_LINE",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "GOAL_LINE = 10\nNUM_AI = 8\n# --- Initialize Pygame ---\npygame.init()\nscreen = pygame.display.set_mode((WIDTH, HEIGHT))\npygame.display.set_caption(\"Red Light Green Light - Road Edition\")\nclock = pygame.time.Clock()\nfont = pygame.font.SysFont(None, 48)\nsmall_font = pygame.font.SysFont(None, 36)\n# --- Asset Loading ---",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "NUM_AI",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "NUM_AI = 8\n# --- Initialize Pygame ---\npygame.init()\nscreen = pygame.display.set_mode((WIDTH, HEIGHT))\npygame.display.set_caption(\"Red Light Green Light - Road Edition\")\nclock = pygame.time.Clock()\nfont = pygame.font.SysFont(None, 48)\nsmall_font = pygame.font.SysFont(None, 36)\n# --- Asset Loading ---\ndef load_image(filename, size=None):",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "screen",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "screen = pygame.display.set_mode((WIDTH, HEIGHT))\npygame.display.set_caption(\"Red Light Green Light - Road Edition\")\nclock = pygame.time.Clock()\nfont = pygame.font.SysFont(None, 48)\nsmall_font = pygame.font.SysFont(None, 36)\n# --- Asset Loading ---\ndef load_image(filename, size=None):\n    try:\n        img = pygame.image.load(filename).convert_alpha()\n        if size:",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "clock",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "clock = pygame.time.Clock()\nfont = pygame.font.SysFont(None, 48)\nsmall_font = pygame.font.SysFont(None, 36)\n# --- Asset Loading ---\ndef load_image(filename, size=None):\n    try:\n        img = pygame.image.load(filename).convert_alpha()\n        if size:\n            img = pygame.transform.scale(img, size)\n        return img",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "font",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "font = pygame.font.SysFont(None, 48)\nsmall_font = pygame.font.SysFont(None, 36)\n# --- Asset Loading ---\ndef load_image(filename, size=None):\n    try:\n        img = pygame.image.load(filename).convert_alpha()\n        if size:\n            img = pygame.transform.scale(img, size)\n        return img\n    except:",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "small_font",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "small_font = pygame.font.SysFont(None, 36)\n# --- Asset Loading ---\ndef load_image(filename, size=None):\n    try:\n        img = pygame.image.load(filename).convert_alpha()\n        if size:\n            img = pygame.transform.scale(img, size)\n        return img\n    except:\n        print(f\"[!] Failed to load: {filename}\")",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "doll_img",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "doll_img = load_image(\"doll.png\", (120, 180)) \nplayer_img = load_image(\"bluecar.png\", (PLAYER_SIZE, PLAYER_SIZE))\nai_img = load_image(\"redcar.png\", (PLAYER_SIZE, PLAYER_SIZE))\n# --- Procedural Road Background ---\ndef create_road_bg():\n    bg = pygame.Surface((WIDTH, HEIGHT))\n    bg.fill((30, 30, 30))  # Dark gray background\n    # Draw road markings (full width)\n    pygame.draw.rect(bg, (50, 50, 50), (0, HEIGHT//3, WIDTH, HEIGHT//3))\n    for y in range(0, HEIGHT, 40):",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "player_img",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "player_img = load_image(\"bluecar.png\", (PLAYER_SIZE, PLAYER_SIZE))\nai_img = load_image(\"redcar.png\", (PLAYER_SIZE, PLAYER_SIZE))\n# --- Procedural Road Background ---\ndef create_road_bg():\n    bg = pygame.Surface((WIDTH, HEIGHT))\n    bg.fill((30, 30, 30))  # Dark gray background\n    # Draw road markings (full width)\n    pygame.draw.rect(bg, (50, 50, 50), (0, HEIGHT//3, WIDTH, HEIGHT//3))\n    for y in range(0, HEIGHT, 40):\n        pygame.draw.rect(bg, (200, 200, 0), (WIDTH//2 - 5, y, 10, 20))",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "ai_img",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "ai_img = load_image(\"redcar.png\", (PLAYER_SIZE, PLAYER_SIZE))\n# --- Procedural Road Background ---\ndef create_road_bg():\n    bg = pygame.Surface((WIDTH, HEIGHT))\n    bg.fill((30, 30, 30))  # Dark gray background\n    # Draw road markings (full width)\n    pygame.draw.rect(bg, (50, 50, 50), (0, HEIGHT//3, WIDTH, HEIGHT//3))\n    for y in range(0, HEIGHT, 40):\n        pygame.draw.rect(bg, (200, 200, 0), (WIDTH//2 - 5, y, 10, 20))\n    return bg",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    },
+    {
+        "label": "road_bg",
+        "kind": 5,
+        "importPath": "redlgiht_greenlight",
+        "description": "redlgiht_greenlight",
+        "peekOfCode": "road_bg = create_road_bg()\n# --- Player Class ---\nclass Player:\n    def __init__(self, x, y, image, is_human=False):\n        self.rect = pygame.Rect(x, y, PLAYER_SIZE, PLAYER_SIZE)\n        self.image = image\n        self.is_human = is_human\n        self.alive = True\n        self.won = False\n        self.speed = PLAYER_SPEED if is_human else AI_SPEED",
+        "detail": "redlgiht_greenlight",
+        "documentation": {}
+    }
+]
